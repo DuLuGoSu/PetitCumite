@@ -6,10 +6,10 @@ app = Flask(__name__)
 app.secret_key = 'mysecretkey'
 
 db = psycopg2.connect(
-    host="dpg-ci0uvk02qv21rs5d7uu0-a",
+    host="localhost",
     port=5432,
-    user="userdb",
-    password="TKGhGlSICom5gMVIi8yFvtFg9oz1qk74",
+    user="postgres",
+    password="1234",
     database="calendario"
 )
 

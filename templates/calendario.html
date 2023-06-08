@@ -37,10 +37,10 @@
     <input type="date" id="fecha" name="fecha" required>
     <br>
 
+    <input type="submit" value="Guardar Evento" class="btn">
     
   </form>
-  <div class="btn-container">
-    <input type="submit" value="Guardar Evento" class="btn">
+  <div class="btn-container">    
     {% if 'usuario' in session %}
     <a href="{{ url_for('logout') }}" class="btn">Cerrar sesión</a>
     {% endif %}

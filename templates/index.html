@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calendario de Eventos</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+</head>
+<body>
+  <h1>Bienvenido al Calendario de Eventos</h1>
+
+  <p>Esta es una aplicación para compartir eventos con tus amigos.</p>
+
+  {% if 'usuario' not in session %}
+    <a href="{{ url_for('login') }}" class="btn">Iniciar sesión</a>
+    <a href="{{ url_for('signup') }}" class="btn">Registrarse</a>
+  {% else %}
+    <a href="{{ url_for('calendario') }}" class="btn">Ir al Calendario</a>
+    <a href="{{ url_for('logout') }}" class="btn">Cerrar sesión</a>
+  {% endif %}
+</body>
+</html>

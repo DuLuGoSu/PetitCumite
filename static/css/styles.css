@@ -63,3 +63,17 @@ form {
 .evento-row {
   background-color: var(--evento-color);
 }
+
+
+  .table-fit-content th,
+  .table-fit-content td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 0;
+  }
+
+  .table-fit-content th {
+    font-weight: bold;
+  }
+

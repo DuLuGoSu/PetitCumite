@@ -7,19 +7,35 @@
 </head>
 
 <body>
-  <h1>Calendario de Eventos</h1>
+  <h1>Calendario</h1>
+  <h2>Bienvenido, {{ session['usuario'] }}</h2>
 
   <table>
     <tr>
       <th>Título</th>
       <th>Descripción</th>
       <th>Fecha</th>
+      <th>Asistencia</th>
     </tr>
     {% for evento in eventos %}
-    <tr>
+    <tr class="evento-row" style="--evento-color: {{ evento.color }};">
       <td>{{ evento[1] }}</td>
       <td>{{ evento[2] }}</td>
       <td>{{ evento[3].strftime('%d/%m/%Y') }}</td>
+      <td>
+        {% if evento[0] in eventos_confirmados %}
+        Confirmada
+        {% else %}
+        <form action="{{ url_for('confirmar_asistencia', id_evento=evento[0]) }}" method="post">
+          <button type="submit" class="btn">Confirmar</button>
+        </form>
+        {% endif %}
+      </td>
+      <td>
+        {% for usuario in usuarios_confirmados[evento[0]] %}
+          {{ usuario }}, 
+        {% endfor %}
+      </td>
     </tr>
     {% endfor %}
   </table>
@@ -37,15 +53,17 @@
     <input type="date" id="fecha" name="fecha" required>
     <br>
 
+    <label for="color">Color:</label>
+    <input type="color" id="color" name="color">
+    <br>
+
     <input type="submit" value="Guardar Evento" class="btn">
-    
   </form>
-  <div class="btn-container">    
+  <div class="btn-container">
     {% if 'usuario' in session %}
     <a href="{{ url_for('logout') }}" class="btn">Cerrar sesión</a>
     {% endif %}
   </div>
-  
 </body>
 
 </html>

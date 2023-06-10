@@ -59,3 +59,7 @@ form {
   margin-right: 0.5cm;
   max-width: 4cm;
 }
+
+.evento-row {
+  background-color: var(--evento-color);
+}

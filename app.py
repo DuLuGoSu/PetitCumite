@@ -5,11 +5,12 @@ import bcrypt
 app = Flask(__name__)
 app.secret_key = 'mysecretkey'
 
+
 db = psycopg2.connect(
-    host="localhost",
+    host="dpg-ci0uvk02qv21rs5d7uu0-a",
     port=5432,
-    user="postgres",
-    password="1234",
+    user="userdb",
+    password="TKGhGlSICom5gMVIi8yFvtFg9oz1qk74",
     database="calendario"
 )
 
@@ -117,6 +118,23 @@ def confirmar_asistencia(id_evento):
     cursor.close()
     
     return redirect(url_for("calendario"))
+
+@app.route("/desconfirmar_asistencia/<int:id_evento>", methods=["GET", "POST"])
+def desconfirmar_asistencia(id_evento):
+    if 'usuario' not in session:
+        return redirect(url_for("login"))
+
+    id_usuario = session.get("usuario")
+
+    cursor = db.cursor()
+    consulta = "DELETE FROM asistencias WHERE id_evento = %s AND id_usuario = %s"
+    valores = (id_evento, id_usuario)
+    cursor.execute(consulta, valores)
+    db.commit()
+    cursor.close()
+
+    return redirect(url_for("calendario"))
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
